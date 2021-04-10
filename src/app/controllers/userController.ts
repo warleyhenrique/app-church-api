@@ -1,21 +1,27 @@
 import { Request, Response } from 'express';
-import { getRepository} from 'typeorm'
+import { getRepository } from 'typeorm';
 import User from '../models/User';
 
-interface DataRequest{
-  name: string,
-  email: string,
-  password: string,
-
-}
-
 class UserController {
-  public async store(request: Request, response: Response): Promise<User> {
+  async store(request: Request, response: Response) {
+    const repository = getRepository(User);
     const { name, email, password } = request.body;
 
-    const users = New User();
-    return (User);
+    const checkUserExist = await repository.findOne({ where: { email } });
+
+    if (checkUserExist) {
+      return response.sendStatus(409);
+    }
+
+    try {
+      const user = repository.create({ name, email, password });
+      await repository.save(user);
+
+      return response.send(user);
+    } catch {
+      return response.sendStatus(409);
+    }
   }
 }
 
-export default UserController;
+export default new UserController();

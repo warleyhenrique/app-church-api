@@ -1,7 +1,8 @@
-import { response, Router } from 'express';
+import { Router } from 'express';
+import UserController from '../controllers/userController';
 
 const usersRouter = Router();
 
-usersRouter.get('/users', (request, response) => response.sendStatus(200));
+usersRouter.post('/users', UserController.store);
 
 export default usersRouter;
