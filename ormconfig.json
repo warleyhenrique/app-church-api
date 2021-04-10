@@ -4,5 +4,13 @@
    "port": 5432,
    "username": "postgres",
    "password": "docker",
-   "database": "chruchdb"
+   "database": "chruchdb",
+   "migrations": [
+     "./src/database/migrations/*.ts"
+   ],
+   "cli":{
+     "migrationsDir": "./src/database/migrations"
+   }
+
+
 }
