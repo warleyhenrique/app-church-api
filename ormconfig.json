@@ -5,6 +5,7 @@
    "username": "postgres",
    "password": "docker",
    "database": "chruchdb",
+   "synchronize": false,
    "entities":[
      "src/app/models/*.ts"
     ],
