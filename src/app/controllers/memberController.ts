@@ -22,7 +22,7 @@ class MemberController {
     const member = await memberRepository.findOne(id);
 
     if (!member) {
-      return response.status(404).json({ message: 'id not found' });
+      return response.status(404).json({ message: 'id member not found' });
     }
 
     return response.send(member);
