@@ -73,7 +73,7 @@ class MemberController {
     const memberRepository = getRepository(Member);
     const { id } = request.params;
 
-    const memberExist = memberRepository.findOne(id);
+    const memberExist = await memberRepository.findOne(id);
 
     if (!memberExist) {
       return response.status(404).json({ message: 'id not found' });
@@ -83,12 +83,10 @@ class MemberController {
       await memberRepository.delete(id);
       const result = memberRepository.save;
 
-      return response.json;
+      return response.json(result);
     } catch (err) {
-
+      return response.status(409).json(err.message);
     }
-
-    return response.json({ message: 'Im production' });
   }
 }
 
