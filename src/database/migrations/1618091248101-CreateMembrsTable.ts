@@ -20,8 +20,8 @@ export default class CreateMembrsTable1618091248101 implements MigrationInterfac
             isNullable: false,
           },
           {
-            name: 'birthDate',
-            type: 'timestamp',
+            name: 'birthDay',
+            type: 'date',
           },
           {
             name: 'rg',
@@ -51,7 +51,7 @@ export default class CreateMembrsTable1618091248101 implements MigrationInterfac
           },
           {
             name: 'baptizedDate',
-            type: 'timestamp',
+            type: 'date',
             isNullable: true,
           },
           {
@@ -61,7 +61,7 @@ export default class CreateMembrsTable1618091248101 implements MigrationInterfac
           },
           {
             name: 'phoneNumber',
-            type: 'int',
+            type: 'varchar',
             isNullable: true,
           },
           {

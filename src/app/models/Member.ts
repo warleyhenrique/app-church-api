@@ -10,8 +10,10 @@ class User {
   @Column()
   fullName : string;
 
-  @Column()
-  birthDate: Date;
+  @Column({
+    type: 'date',
+  })
+  birthDay: Date;
 
   @Column()
   rg: string;
@@ -28,14 +30,16 @@ class User {
   @Column()
   isBaptized: boolean;
 
-  @Column()
+  @Column({
+    type: 'date',
+  })
   baptizedDate: Date;
 
   @Column()
   memberNumber: string;
 
   @Column()
-  phoneNumber: number;
+  phoneNumber: string;
 
   @Column()
   email: string;

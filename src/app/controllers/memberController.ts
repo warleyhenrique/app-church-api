@@ -8,8 +8,8 @@ class MemberController {
 
     const members = await memberRepository.find();
 
-    if (!members.length > 0) {
-      return response.json('There are no registered members');
+    if (members.length === 0) {
+      return response.sendStatus(204);
     }
 
     return response.send(members);
@@ -27,16 +27,16 @@ class MemberController {
     const memberExist = await memberRepository.findOne({ where: { cpf } });
 
     if (memberExist) {
-      return response.json({ response: 'The CPF has already been registered' });
+      return response.status(409).json({ response: 'The CPF has already been registered' });
     }
 
     try {
       const newMember = memberRepository.create(dataMember);
       await memberRepository.save(newMember);
-      return response.send(newMember);
+      return response.status(201).send(newMember);
     } catch (e) {
       console.log(e);
-      return response.sendStatus(409);
+      return response.status(409).json(e.message);
     }
   }
 
