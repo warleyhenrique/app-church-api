@@ -9,7 +9,7 @@ class MemberController {
     const members = await memberRepository.find();
 
     if (members.length === 0) {
-      return response.json({ return: 'there are no registered members' });
+      return response.json({ message: 'there are no registered members' });
     }
 
     return response.send(members);
