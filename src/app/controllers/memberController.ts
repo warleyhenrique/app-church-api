@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import Member from '../models/Member';
+import memberValidation from '../validations/memberValidadtion';
 
 class MemberController {
   public async index(request: Request, response: Response) {
@@ -37,6 +38,14 @@ class MemberController {
 
     if (memberExist) {
       return response.status(409).json({ response: 'The CPF has already been registered' });
+    }
+
+    const validationResult = memberValidation.validate(dataMember, {
+      abortEarly: false,
+    });
+
+    if (validationResult.error) {
+      return response.status(406).json(validationResult.error.details);
     }
 
     try {

@@ -22,7 +22,7 @@ class UserController {
     const user = await userRepository.findOne(id);
 
     if (!user) {
-      return response.sendStatus(401);
+      return response.sendStatus(404);
     }
 
     return response.send(user);
@@ -81,7 +81,7 @@ class UserController {
 
     try {
       await userRepository.delete(id);
-      return response.send(200);
+      return response.status(200).json({ message: 'ok' });
     } catch {
       return response.sendStatus(409);
     }
