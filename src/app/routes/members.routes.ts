@@ -5,9 +5,9 @@ import AuthMiddleware from '../middlewares/authMiddleware';
 const membersRouter = Router();
 
 membersRouter.get('/', AuthMiddleware, MemberController.index);
-membersRouter.get('/:id', MemberController.show);
-membersRouter.post('/', MemberController.store);
-membersRouter.put('/:id', MemberController.update);
-membersRouter.delete('/:id', MemberController.delete);
+membersRouter.get('/:id', AuthMiddleware, MemberController.show);
+membersRouter.post('/', AuthMiddleware, MemberController.store);
+membersRouter.put('/:id', AuthMiddleware, MemberController.update);
+membersRouter.delete('/:id', AuthMiddleware, MemberController.delete);
 
 export default membersRouter;
