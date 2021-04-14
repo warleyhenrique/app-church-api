@@ -83,8 +83,8 @@ class UserController {
       const newUser = await userRepository.save(checkUserExist);
 
       return response.send(newUser);
-    } catch {
-      return response.sendStatus(403);
+    } catch (err) {
+      return response.status(403).json(err);
     }
   }
 
