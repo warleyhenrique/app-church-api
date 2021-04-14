@@ -68,6 +68,14 @@ class MemberController {
       return response.status(404).json({ message: 'id not found' });
     }
 
+    const validationResult = memberValidation.validate(dataMember, {
+      abortEarly: false,
+    });
+
+    if (validationResult.error) {
+      return response.status(406).json(validationResult.error.details);
+    }
+
     try {
       memberRepository.merge(member, dataMember);
       const newMember = await memberRepository.save(member);

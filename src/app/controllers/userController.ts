@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import User from '../models/User';
+import userValidation from '../validations/userValidation';
 
 class UserController {
   public async index(request: Request, response: Response) {
@@ -38,6 +39,15 @@ class UserController {
       return response.sendStatus(409);
     }
 
+    const validationResult = userValidation.validate({ name, email, password }, {
+      abortEarly: false,
+    });
+
+    if (validationResult.error) {
+      const err = validationResult.error.details;
+      return response.status(406).json(err);
+    }
+
     try {
       const user = repository.create({ name, email, password });
       await repository.save(user);
@@ -57,6 +67,15 @@ class UserController {
 
     if (!checkUserExist) {
       return response.sendStatus(401);
+    }
+
+    const validationResult = userValidation.validate({ name, email, password }, {
+      abortEarly: false,
+    });
+
+    if (validationResult.error) {
+      const err = validationResult.error.details;
+      return response.status(406).json(err);
     }
 
     try {
