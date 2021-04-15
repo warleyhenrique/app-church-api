@@ -4,7 +4,7 @@ import { getRepository } from 'typeorm';
 import Departament from '../models/Departament';
 
 class DepartamentController {
-  public async index(resquest: Request, response: Response) {
+  public async index(request: Request, response: Response) {
     const departamentRepository = getRepository(Departament);
 
     const departaments = await departamentRepository.find();
@@ -16,7 +16,7 @@ class DepartamentController {
     return response.json(departaments);
   }
 
-  public async show(resquest: Request, response: Response) {
+  public async show(request: Request, response: Response) {
     const departamentRepository = getRepository(Departament);
     const { id } = request.params;
 
@@ -49,7 +49,7 @@ class DepartamentController {
     }
   }
 
-  public async update(resquest: Request, response: Response) {
+  public async update(request: Request, response: Response) {
     const departamentRepository = getRepository(Departament);
     const { name, description } = request.body;
     const { id } = request.params;
@@ -70,7 +70,7 @@ class DepartamentController {
     }
   }
 
-  public async destroy(resquest: Request, response: Response) {
+  public async destroy(request: Request, response: Response) {
     const departamentRepository = getRepository(Departament);
     const { id } = request.params;
 
