@@ -76,7 +76,7 @@ class DepartamentController {
 
     const departament = await departamentRepository.findOne(id);
 
-    if (departament) {
+    if (!departament) {
       return response.status(406).json({ message: 'user not found' });
     }
 
