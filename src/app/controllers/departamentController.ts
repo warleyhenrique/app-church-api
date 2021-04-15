@@ -61,15 +61,13 @@ class DepartamentController {
     }
 
     try {
-      departamentRepository.merge(departament);
+      departamentRepository.merge(departament, { name, description });
       const newDepartament = await departamentRepository.save(departament);
 
       return response.json(newDepartament);
     } catch (err) {
       return response.status(406).json(err.message);
     }
-
-    return ('');
   }
 
   public async destroy(resquest: Request, response: Response) {
@@ -89,8 +87,6 @@ class DepartamentController {
     } catch (err) {
       return response.status(400).json(err.message);
     }
-
-    return ('');
   }
 }
 
