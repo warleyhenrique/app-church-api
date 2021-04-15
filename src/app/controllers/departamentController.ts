@@ -1,4 +1,4 @@
-import { request, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 
 import Departament from '../models/Departament';
@@ -10,7 +10,7 @@ class DepartamentController {
     const departaments = await departamentRepository.find();
 
     if (departaments.length === 0) {
-      return response.status(200).json('no registered users');
+      return response.status(200).json('no registered departaments');
     }
 
     return response.json(departaments);
@@ -29,17 +29,17 @@ class DepartamentController {
     return response.send(departament);
   }
 
-  public async store(resquest: Request, response: Response) {
+  public async store(request: Request, response: Response) {
     const departamentRepository = getRepository(Departament);
     const { name, description } = request.body;
 
-    const departamentExist = departamentRepository.find({ where: { name } });
-
-    if (departamentExist) {
-      return response.status(409).json('department already registered');
-    }
-
     try {
+      const departamentExist = await departamentRepository.findOne({ where: { name } });
+
+      if (departamentExist) {
+        return response.status(409).json('department already registered');
+      }
+
       const newDepartament = departamentRepository.create({ name, description });
       await departamentRepository.save(newDepartament);
 
