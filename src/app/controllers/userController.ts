@@ -88,7 +88,7 @@ class UserController {
     }
   }
 
-  public async delete(request: Request, response: Response) {
+  public async destroy(request: Request, response: Response) {
     const userRepository = getRepository(User);
     const { id } = request.params;
 

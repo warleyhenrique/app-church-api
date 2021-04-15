@@ -86,7 +86,7 @@ class MemberController {
     }
   }
 
-  public async delete(request: Request, response: Response) {
+  public async destroy(request: Request, response: Response) {
     const memberRepository = getRepository(Member);
     const { id } = request.params;
 

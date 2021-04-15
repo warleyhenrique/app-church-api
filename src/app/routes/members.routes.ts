@@ -8,6 +8,6 @@ membersRouter.get('/', AuthMiddleware, MemberController.index);
 membersRouter.get('/:id', AuthMiddleware, MemberController.show);
 membersRouter.post('/', AuthMiddleware, MemberController.store);
 membersRouter.put('/:id', AuthMiddleware, MemberController.update);
-membersRouter.delete('/:id', AuthMiddleware, MemberController.delete);
+membersRouter.delete('/:id', AuthMiddleware, MemberController.destroy);
 
 export default membersRouter;
