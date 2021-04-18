@@ -1,6 +1,7 @@
 import {
-  Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn,
+  Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany,
 } from 'typeorm';
+import Member from './Member';
 
 @Entity('positions')
 class Position {
@@ -10,8 +11,12 @@ class Position {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   description: string;
+
+  // eslint-disable-next-line no-unused-vars
+  @OneToMany((type) => Member, (position) => Position)
+  member: Member[]
 
   @CreateDateColumn()
   createdAt: Date;

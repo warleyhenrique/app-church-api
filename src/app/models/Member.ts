@@ -1,9 +1,12 @@
 import {
-  Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn,
+  Entity, Column, PrimaryGeneratedColumn, CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
 } from 'typeorm';
+import Position from './Position';
 
 @Entity('members')
-class User {
+class Member {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -15,49 +18,54 @@ class User {
   })
   birthDay: Date;
 
-  @Column()
+  @Column({ nullable: true })
   rg: string;
 
   @Column()
-  cpf: number;
+  cpf: string;
 
-  @Column()
+  @Column({ nullable: true })
   fatherName: string;
 
-  @Column()
+  @Column({ nullable: true })
   motherName: string;
 
-  @Column()
+  @Column({ nullable: false })
   isBaptized: boolean;
 
   @Column({
     type: 'date',
+    nullable: true,
   })
   baptizedDate: Date;
 
-  @Column()
+  @Column({ nullable: true })
   memberNumber: string;
 
-  @Column()
+  @Column({ nullable: true })
   phoneNumber: string;
 
-  @Column()
+  @Column({ nullable: true })
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   streetAddress: string;
 
-  @Column()
+  @Column({ nullable: true })
   numberAddress: string;
 
-  @Column()
+  @Column({ nullable: true })
   neighborhoodAddress: string;
 
-  @Column()
+  @Column({ nullable: true })
   cityAddress: string;
 
-  @Column()
+  @Column({ nullable: true })
   stateAddress: string;
+
+  // eslint-disable-next-line no-unused-vars
+  @ManyToOne((type) => Position, (members) => Member, { eager: true })
+  position: Position
 
   @CreateDateColumn()
   createdAt: Date;
@@ -66,4 +74,4 @@ class User {
   updateAt: Date;
 }
 
-export default User;
+export default Member;

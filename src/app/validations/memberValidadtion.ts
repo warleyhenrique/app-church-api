@@ -17,6 +17,7 @@ const memberSchema = Joi.object({
   neighborhoodAddress: Joi.string().allow(null),
   cityAddress: Joi.string().allow(null),
   stateAddress: Joi.string().allow(null),
+  position: Joi.object().allow(null),
 
 });
 

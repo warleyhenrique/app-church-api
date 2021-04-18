@@ -1,9 +1,9 @@
 import {
-  Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn,
+  CreateDateColumn, Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('departaments')
-class Departament {
+@Entity('offices')
+class Office {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -20,4 +20,4 @@ class Departament {
   updateAt: Date;
 }
 
-export default Departament;
+export default Office;
