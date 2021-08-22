@@ -31,8 +31,7 @@ class MemberController {
 
   public async store(request: Request, response: Response) {
     const memberRepository = getRepository(Member);
-    const dataMember = request.body;
-    const { cpf } = request.body;
+    const { dataMember, cpf } = request.body;
 
     const memberExist = await memberRepository.findOne({ where: { cpf } });
 
